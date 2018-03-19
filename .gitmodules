@@ -1,0 +1,3 @@
+[submodule "ConnectFourServer"]
+	path = ConnectFourServer
+	url = https://github.com/AhmetFiratS/ConnectFour
