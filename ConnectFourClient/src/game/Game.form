@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="Table">
       <Properties>
+        <Property name="defaultCloseOperation" type="int" value="3"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[700, 600]"/>
         </Property>
@@ -16,20 +17,12 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="Columb0" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="Columb1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="Columb2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="User_name" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                  <Component id="Columb0" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="Columb1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="Columb2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="Columb3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -40,13 +33,20 @@
                   <Component id="Columb6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="134" max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="User_name" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="rival_Name" min="-2" pref="96" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="Columb3" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -59,7 +59,11 @@
                       </Group>
                       <Component id="Columb4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="Columb5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="Columb6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="Columb6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="rival_Name" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="105" max="32767" attributes="0"/>
               </Group>
@@ -76,6 +80,9 @@
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="Columb0">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb0MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -99,15 +106,13 @@
                       <Component id="L00" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="L10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="L10" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Component id="L20" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="L30" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="L40" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="L50" min="-2" max="-2" attributes="0"/>
@@ -124,6 +129,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L20">
               <Properties>
@@ -131,6 +139,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L30">
               <Properties>
@@ -138,6 +149,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L40">
               <Properties>
@@ -145,6 +159,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L50">
               <Properties>
@@ -152,6 +169,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L00">
               <Properties>
@@ -159,10 +179,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb1">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb1MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -216,6 +242,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L21">
               <Properties>
@@ -223,6 +252,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L39">
               <Properties>
@@ -237,6 +269,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L41">
               <Properties>
@@ -244,6 +279,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L01">
               <Properties>
@@ -251,6 +289,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L51">
               <Properties>
@@ -258,10 +299,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb2">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb2MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -305,6 +352,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L12">
               <Properties>
@@ -312,6 +362,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L22">
               <Properties>
@@ -319,6 +372,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L32">
               <Properties>
@@ -326,6 +382,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L52">
               <Properties>
@@ -333,6 +392,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L42">
               <Properties>
@@ -340,10 +402,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb3">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb3MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -388,6 +456,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L13">
               <Properties>
@@ -395,6 +466,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L23">
               <Properties>
@@ -402,6 +476,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L33">
               <Properties>
@@ -409,6 +486,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L43">
               <Properties>
@@ -416,6 +496,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L53">
               <Properties>
@@ -423,10 +506,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb4">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb4MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -471,6 +560,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L14">
               <Properties>
@@ -478,6 +570,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L24">
               <Properties>
@@ -485,6 +580,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L34">
               <Properties>
@@ -492,6 +590,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L44">
               <Properties>
@@ -499,6 +600,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L54">
               <Properties>
@@ -506,10 +610,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb5">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb5MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -554,6 +664,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L15">
               <Properties>
@@ -561,6 +674,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L25">
               <Properties>
@@ -568,6 +684,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L35">
               <Properties>
@@ -575,6 +694,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L45">
               <Properties>
@@ -582,6 +704,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L55">
               <Properties>
@@ -589,10 +714,16 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Columb6">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Columb6MouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -637,6 +768,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L16">
               <Properties>
@@ -644,6 +778,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L26">
               <Properties>
@@ -651,6 +788,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L36">
               <Properties>
@@ -658,6 +798,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L46">
               <Properties>
@@ -665,6 +808,9 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="L56">
               <Properties>
@@ -672,9 +818,23 @@
                   <Image iconType="3" name="/images/button.jpg"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="rival_Name">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Rival_Name"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
   </NonVisualComponents>

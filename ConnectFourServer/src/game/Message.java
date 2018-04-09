@@ -11,7 +11,7 @@ package game;
  */
 public class Message implements java.io.Serializable {
     //mesaj tipleri enum 
-    public static enum Message_Type {None, Name, Disconnect,RivalConnected, Text, Selected, Bitis,Start,}
+    public static enum Message_Type {None, Name, Disconnect,RivalConnected, Text, Selected, Bitis,Start,UserNumber,Coordination}
     //mesajın tipi
     public Message_Type type;
     //mesajın içeriği obje tipinde ki istenilen tip içerik yüklenebilsin
@@ -19,5 +19,10 @@ public class Message implements java.io.Serializable {
     public Message(Message_Type t)
     {
         this.type=t;
+    }
+      @Override
+    public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 }

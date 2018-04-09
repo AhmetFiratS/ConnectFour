@@ -34,6 +34,9 @@ class ServerThread extends Thread {
                 //bir adet id de kendimiz verdik
                 SClient nclient = new SClient(clientSocket, Server.IdClient);
                 
+                Message msg1 = new Message(Message.Message_Type.UserNumber);
+                msg1.content=Server.IdClient;
+                Server.Send(nclient,msg1);
                 Server.IdClient++;
                 //clienti listeye ekle.
                 Server.Clients.add(nclient);
@@ -51,7 +54,7 @@ public class Server {
 
     //server soketi eklemeliyiz
     public static ServerSocket serverSocket;
-    public static int IdClient = 0;
+    public static int IdClient = 1;
     // Serverın dileyeceği port
     public static int port = 0;
     //Serverı sürekli dinlemede tutacak thread nesnesi

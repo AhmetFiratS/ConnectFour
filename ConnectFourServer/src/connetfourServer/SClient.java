@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package connetfourServer;
 
 import game.Message;
@@ -21,6 +16,7 @@ import java.util.logging.Logger;
 public class SClient {
 
     int id;
+    int userNo;
     public String name = "NoName";
     Socket soket;
     ObjectOutputStream sOutput;
@@ -74,6 +70,9 @@ public class SClient {
             //client bağlı olduğu sürece dönsün
             while (TheClient.soket.isConnected()) {
                 try {
+                    Message msgID = new Message(Message.Message_Type.UserNumber);
+                    msgID.content = TheClient.id;
+                    Server.Send(TheClient,msgID );
                     //mesajı bekleyen kod satırı
                     Message received = (Message) (TheClient.sInput.readObject());
                     //mesaj gelirse bu satıra geçer
@@ -86,6 +85,9 @@ public class SClient {
                             break;
                         case Disconnect:
                             break;
+                        case UserNumber:
+                            TheClient.userNo=(int)received.content;
+                            break;
                         case Text:
                             //gelen metni direkt rakibe gönder
                             Server.Send(TheClient.rival, received);
@@ -93,6 +95,11 @@ public class SClient {
                         case Selected:
                             //gelen seçim yapıldı mesajını rakibe gönder
                             Server.Send(TheClient.rival, received);
+                            break;
+                        case Coordination:
+                            Server.Send(TheClient.rival, received);
+                            int s[] = (int[])received.content;
+                            System.out.println(s[0]+"   "+s[1]);
                             break;
                         case Bitis:
                             break;

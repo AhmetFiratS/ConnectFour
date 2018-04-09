@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 
 //import connectfourClient.Client;
-import java.awt.Component;
-import java.awt.Container;
-import java.util.Random;
+import connectfourClient.Client;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
@@ -18,28 +15,39 @@ import javax.swing.JFrame;
  */
 public class Game extends javax.swing.JFrame {
 
-    //framedeki komponentlere erişim için satatik oyun değişkeni
+    //framedeki komponentlere erişim için statik oyun değişkeni
     public static Game ThisGame;
-    //ekrandaki resim değişimi için timer yerine thread
-    public Thread tmr_slider;
-    //karşı tarafın seçimi seçim -1 deyse seçilmemiş
+    //Oyun tahtasının Matrix temsili
+    public static int[][] TableMatrix = new int[6][7];
+    //karşı tarafın seçimi seçim -1 
     public int RivalSelection = -1;
-    //benim seçimim seçim -1 deyse seçilmemiş
-    public int Myselection = -1;
-    
-    ImageIcon icons_right[];
-    ImageIcon icons_left[];
+   
+    public ImageIcon icon_empty;
+    public ImageIcon icon_user;
+    public ImageIcon icon_rival;
     ImageIcon icons[];
-    Random rand;
     
+
     public Game() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                TableMatrix[i][j] = 0;
+            }
+        }
+        try {
+            icon_empty = new ImageIcon(new ImageIcon(ImageIO.read(this.getClass().getResource("/images/button.jpg"))).getImage().getScaledInstance(60, 58, Image.SCALE_DEFAULT));
+            icon_user = new ImageIcon(new ImageIcon(ImageIO.read(this.getClass().getResource("/images/b_user.jpg"))).getImage().getScaledInstance(60, 58, Image.SCALE_DEFAULT));
+            icon_rival = new ImageIcon(new ImageIcon(ImageIO.read(this.getClass().getResource("/images/b_rival.jpg"))).getImage().getScaledInstance(60, 58, Image.SCALE_DEFAULT));
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
-        ThisGame=this;
+        ThisGame = this;
         ThisGame.Table.setVisible(false);
-        //ThisGame.Table.setVisible(false);
+        
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,14 +104,22 @@ public class Game extends javax.swing.JFrame {
         L36 = new javax.swing.JLabel();
         L46 = new javax.swing.JLabel();
         L56 = new javax.swing.JLabel();
+        rival_Name = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Username = new javax.swing.JTextField();
         ButtonConnect = new javax.swing.JButton();
 
+        Table.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         Table.setMinimumSize(new java.awt.Dimension(700, 600));
 
         User_name.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         User_name.setText("User Name");
+
+        Columb0.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb0MouseClicked(evt);
+            }
+        });
 
         L10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
@@ -137,18 +153,23 @@ public class Game extends javax.swing.JFrame {
                 .addComponent(L00)
                 .addGap(0, 0, 0)
                 .addGroup(Columb0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Columb0Layout.createSequentialGroup()
-                        .addComponent(L10)
-                        .addGap(58, 58, 58))
+                    .addComponent(L10)
                     .addGroup(Columb0Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(L20)
                         .addGap(0, 0, 0)
                         .addComponent(L30)
+                        .addGap(0, 0, 0)
                         .addComponent(L40)
                         .addGap(0, 0, 0)
                         .addComponent(L50))))
         );
+
+        Columb1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb1MouseClicked(evt);
+            }
+        });
 
         L11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
@@ -201,6 +222,12 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        Columb2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb2MouseClicked(evt);
+            }
+        });
+
         L02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
         L12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
@@ -243,6 +270,12 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(L52))
         );
+
+        Columb3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb3MouseClicked(evt);
+            }
+        });
 
         L03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
@@ -288,6 +321,12 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        Columb4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb4MouseClicked(evt);
+            }
+        });
+
         L04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
         L14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
@@ -331,6 +370,12 @@ public class Game extends javax.swing.JFrame {
                 .addComponent(L54)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        Columb5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb5MouseClicked(evt);
+            }
+        });
 
         L05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
@@ -376,6 +421,12 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        Columb6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Columb6MouseClicked(evt);
+            }
+        });
+
         L06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
 
         L16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/button.jpg"))); // NOI18N
@@ -420,22 +471,20 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        rival_Name.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rival_Name.setText("Rival_Name");
+
         javax.swing.GroupLayout TableLayout = new javax.swing.GroupLayout(Table.getContentPane());
         Table.getContentPane().setLayout(TableLayout);
         TableLayout.setHorizontalGroup(
             TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TableLayout.createSequentialGroup()
-                .addGroup(TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TableLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(Columb0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Columb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Columb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TableLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(User_name)))
+                .addGap(104, 104, 104)
+                .addComponent(Columb0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Columb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Columb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(Columb3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -445,12 +494,18 @@ public class Game extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(Columb6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(134, Short.MAX_VALUE))
+            .addGroup(TableLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(User_name)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rival_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         TableLayout.setVerticalGroup(
             TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TableLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Columb3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(TableLayout.createSequentialGroup()
                         .addGroup(TableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -461,7 +516,10 @@ public class Game extends javax.swing.JFrame {
                         .addComponent(User_name))
                     .addComponent(Columb4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Columb5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Columb6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TableLayout.createSequentialGroup()
+                        .addComponent(Columb6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rival_Name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
@@ -508,19 +566,235 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConnectActionPerformed
-        
-        //Client.Start("127.0.0.1", 2000);
-       
+
+        Client.Start("127.0.0.1", 2000);
+
         ThisGame.Table.setVisible(true);
         ThisGame.Table.repaint();
         User_name.setText(Username.getText());
-        
-        
     }//GEN-LAST:event_ButtonConnectActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void Columb0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb0MouseClicked
+        SendMessage(0);
+    }//GEN-LAST:event_Columb0MouseClicked
+
+    private void Columb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb1MouseClicked
+        SendMessage(1);
+    }//GEN-LAST:event_Columb1MouseClicked
+
+    private void Columb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb2MouseClicked
+        SendMessage(2);
+    }//GEN-LAST:event_Columb2MouseClicked
+
+    private void Columb3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb3MouseClicked
+        SendMessage(3);
+    }//GEN-LAST:event_Columb3MouseClicked
+
+    private void Columb4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb4MouseClicked
+        SendMessage(4);
+    }//GEN-LAST:event_Columb4MouseClicked
+
+    private void Columb5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb5MouseClicked
+        SendMessage(5); 
+    }//GEN-LAST:event_Columb5MouseClicked
+
+    private void Columb6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Columb6MouseClicked
+        SendMessage(6);
+    }//GEN-LAST:event_Columb6MouseClicked
+
+    public void SendMessage(int y){
+        boolean flag = false;
+        int[] Myselection = {0, 0};
+        Message msg = new Message(Message.Message_Type.Coordination);
+        Myselection[1]=y;
+        
+        for (int i = 0; i < 6; i++) {
+            if (TableMatrix[i][y] != 0) {
+                TableMatrix[i - 1][y] = Client.UserNumber;
+                Myselection[0] = i - 1;
+                msg.content = Myselection;
+                flag = true;
+                break;
+            }
+        }
+        if (flag == false) {
+            TableMatrix[5][y] = Client.UserNumber;
+            Myselection[0] = 5;
+            msg.content = Myselection;
+        }
+        Client.Send(msg);
+        changeImage(Myselection);
+    }
+    public static void changeImage(int[] coordination) {
+        switch (coordination[0]) {
+            case 0:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L00.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L01.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L02.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L03.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L04.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L05.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L06.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 1:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L10.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L11.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L12.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L13.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L14.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L15.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L16.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L20.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L21.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L22.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L23.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L24.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L25.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L26.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L30.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L31.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L32.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L33.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L34.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L35.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L36.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 4:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L40.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L41.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L42.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L43.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L44.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L45.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L46.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 5:
+                switch (coordination[1]) {
+                    case 0:
+                        Game.ThisGame.L50.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 1:
+                        Game.ThisGame.L51.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 2:
+                        Game.ThisGame.L52.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 3:
+                        Game.ThisGame.L53.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 4:
+                        Game.ThisGame.L54.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 5:
+                        Game.ThisGame.L55.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    case 6:
+                        Game.ThisGame.L56.setIcon(Game.ThisGame.icon_user);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -563,52 +837,53 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JPanel Columb4;
     private javax.swing.JPanel Columb5;
     private javax.swing.JPanel Columb6;
-    private javax.swing.JLabel L00;
-    private javax.swing.JLabel L01;
-    private javax.swing.JLabel L02;
-    private javax.swing.JLabel L03;
-    private javax.swing.JLabel L04;
-    private javax.swing.JLabel L05;
-    private javax.swing.JLabel L06;
-    private javax.swing.JLabel L10;
-    private javax.swing.JLabel L11;
-    private javax.swing.JLabel L12;
-    private javax.swing.JLabel L13;
-    private javax.swing.JLabel L14;
-    private javax.swing.JLabel L15;
-    private javax.swing.JLabel L16;
-    private javax.swing.JLabel L20;
-    private javax.swing.JLabel L21;
-    private javax.swing.JLabel L22;
-    private javax.swing.JLabel L23;
-    private javax.swing.JLabel L24;
-    private javax.swing.JLabel L25;
-    private javax.swing.JLabel L26;
-    private javax.swing.JLabel L30;
-    private javax.swing.JLabel L31;
-    private javax.swing.JLabel L32;
-    private javax.swing.JLabel L33;
-    private javax.swing.JLabel L34;
-    private javax.swing.JLabel L35;
-    private javax.swing.JLabel L36;
+    public javax.swing.JLabel L00;
+    public javax.swing.JLabel L01;
+    public javax.swing.JLabel L02;
+    public javax.swing.JLabel L03;
+    public javax.swing.JLabel L04;
+    public javax.swing.JLabel L05;
+    public javax.swing.JLabel L06;
+    public javax.swing.JLabel L10;
+    public javax.swing.JLabel L11;
+    public javax.swing.JLabel L12;
+    public javax.swing.JLabel L13;
+    public javax.swing.JLabel L14;
+    public javax.swing.JLabel L15;
+    public javax.swing.JLabel L16;
+    public javax.swing.JLabel L20;
+    public javax.swing.JLabel L21;
+    public javax.swing.JLabel L22;
+    public javax.swing.JLabel L23;
+    public javax.swing.JLabel L24;
+    public javax.swing.JLabel L25;
+    public javax.swing.JLabel L26;
+    public javax.swing.JLabel L30;
+    public javax.swing.JLabel L31;
+    public javax.swing.JLabel L32;
+    public javax.swing.JLabel L33;
+    public javax.swing.JLabel L34;
+    public javax.swing.JLabel L35;
+    public javax.swing.JLabel L36;
     private javax.swing.JLabel L39;
-    private javax.swing.JLabel L40;
-    private javax.swing.JLabel L41;
-    private javax.swing.JLabel L42;
-    private javax.swing.JLabel L43;
-    private javax.swing.JLabel L44;
-    private javax.swing.JLabel L45;
-    private javax.swing.JLabel L46;
-    private javax.swing.JLabel L50;
-    private javax.swing.JLabel L51;
-    private javax.swing.JLabel L52;
-    private javax.swing.JLabel L53;
-    private javax.swing.JLabel L54;
-    private javax.swing.JLabel L55;
-    private javax.swing.JLabel L56;
+    public javax.swing.JLabel L40;
+    public javax.swing.JLabel L41;
+    public javax.swing.JLabel L42;
+    public javax.swing.JLabel L43;
+    public javax.swing.JLabel L44;
+    public javax.swing.JLabel L45;
+    public javax.swing.JLabel L46;
+    public javax.swing.JLabel L50;
+    public javax.swing.JLabel L51;
+    public javax.swing.JLabel L52;
+    public javax.swing.JLabel L53;
+    public javax.swing.JLabel L54;
+    public javax.swing.JLabel L55;
+    public javax.swing.JLabel L56;
     public javax.swing.JFrame Table;
     private javax.swing.JLabel User_name;
     public javax.swing.JTextField Username;
     private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel rival_Name;
     // End of variables declaration//GEN-END:variables
 }
