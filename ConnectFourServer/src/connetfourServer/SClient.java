@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -42,7 +43,6 @@ public class SClient {
         //thread nesneleri
         this.listenThread = new Listen(this);
         this.pairThread = new PairingThread(this);
-
     }
 
     //client mesaj gönderme
@@ -52,7 +52,44 @@ public class SClient {
         } catch (IOException ex) {
             Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    public void Change_Control(int no,int [] coordi,SClient sc){
+        ArrayList<int[]> bulunanlar=new ArrayList<>();
+        int [][] m=Server.Matrixs.get(no);
+        m[coordi[0]][coordi[1]]=sc.id;
+        int sayacX=0,sayacY=0;
+        
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                if(m[i][j]==sc.id){
+                    int[] point={i,j};
+                    bulunanlar.add(point);
+                }
+            }
+        }
+        
+        for (int[] xy : bulunanlar) {
+            System.out.println(sc.id+". degerleri = "+xy[0]+ "<->"+xy[1]);
+        }
+        for (int[] xy : bulunanlar) {
+            for (int[] i : bulunanlar) {
+                if(xy[0]==i[0])
+                    sayacX++;
+                if(xy[1]==i[1])
+                    sayacY++;
+            }
+            if(sayacX==4 || sayacY==4){
+            Message win = new Message(Message.Message_Type.Win);
+            win.content = true;
+            Server.Send(sc,win);
+            Message lose = new Message(Message.Message_Type.Lose);
+            lose.content = true;
+            Server.Send(sc.rival,lose);
+            break;
+        }
+            sayacX=0;sayacY=0;
+        }
+        
     }
 
     //client dinleme threadi
@@ -88,36 +125,29 @@ public class SClient {
                         case UserNumber:
                             TheClient.userNo=(int)received.content;
                             break;
-                        case Text:
-                            //gelen metni direkt rakibe gönder
-                            Server.Send(TheClient.rival, received);
-                            break;
                         case Selected:
                             //gelen seçim yapıldı mesajını rakibe gönder
                             Server.Send(TheClient.rival, received);
                             break;
                         case Coordination:
+                            Change_Control(Server.matrixcount,(int[])received.content,TheClient);
                             Server.Send(TheClient.rival, received);
-                            int s[] = (int[])received.content;
-                            System.out.println(s[0]+"   "+s[1]);
+                            //int s[] = (int[])received.content;
+                            //System.out.println(s[0]+"   "+s[1]);
                             break;
                         case Bitis:
                             break;
-
                     }
-
                 } catch (IOException ex) {
                     Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
                     //client bağlantısı koparsa listeden sil
                     Server.Clients.remove(TheClient);
-
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
                     //client bağlantısı koparsa listeden sil
                     Server.Clients.remove(TheClient);
                 }
             }
-
         }
     }
 
@@ -175,6 +205,13 @@ public class SClient {
                     //lock mekanizmasını servest bırak
                     //bırakılmazsa deadlock olur.
                     Server.pairTwo.release(1);
+                    int[][] Matrix = new int[6][7];
+                        for (int i = 0; i < 6; i++) {
+                            for (int j = 0; j < 7; j++) {
+                                Matrix[i][j] = 0;
+                            }
+                        }
+                    Server.Matrixs.add(Matrix);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(PairingThread.class.getName()).log(Level.SEVERE, null, ex);
                 }

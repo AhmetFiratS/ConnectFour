@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane; 
 
 /**
  *
@@ -37,11 +38,25 @@ class Listen extends Thread {
                     case Coordination:
                         int [] x= (int[]) received.content;
                         changeImage(x);
-                          int s[] = (int[])received.content;
-                            System.out.println("Gelen==>  "+s[0]+"   "+s[1]);
+                        Game.ThisGame.click=true;
+                          /*int s[] = (int[])received.content;
+                            System.out.println("Gelen==>  "+s[0]+"   "+s[1]);*/
                     case Disconnect:
                         break;
-                    
+                    case Win:
+                        int input=0;
+                        if((boolean)received.content)
+                           input= JOptionPane.showOptionDialog(Game.ThisGame.Table, "TEBRİKLER\nKazandınız...", "Game Over", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        if(input == JOptionPane.OK_OPTION || input==JOptionPane.CANCEL_OPTION)
+                            System.exit(0);
+                        break;
+                    case Lose:
+                        int input1=0;
+                        if((boolean)received.content)
+                           input1= JOptionPane.showOptionDialog(Game.ThisGame.Table, "Kaybettiniz...", "Game Over", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                        if(input1 == JOptionPane.OK_OPTION || input1==JOptionPane.CANCEL_OPTION)
+                            System.exit(0);
+                        break;
                     case UserNumber:
                         Client.UserNumber=(int) received.content;
                         break;

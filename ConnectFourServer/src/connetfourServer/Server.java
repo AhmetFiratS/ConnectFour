@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package connetfourServer;
 
 import game.Message;
@@ -60,9 +55,11 @@ public class Server {
     //Serverı sürekli dinlemede tutacak thread nesnesi
     public static ServerThread runThread;
     //public static PairingThread pairThread;
+    public static int matrixcount=0;
 
     public static ArrayList<SClient> Clients = new ArrayList<>();
-
+    public static ArrayList<int [][]> Matrixs=new ArrayList<>();
+    
     //semafor nesnesi
     public static Semaphore pairTwo = new Semaphore(1, true);
 

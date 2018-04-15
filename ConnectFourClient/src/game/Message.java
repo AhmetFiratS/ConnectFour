@@ -10,7 +10,7 @@ package game;
  * @author ahmet
  */
 public class Message implements java.io.Serializable {
-    public static enum Message_Type {None, Name, Disconnect,RivalConnected, Text, Selected, Bitis,Start,UserNumber,Coordination}
+    public static enum Message_Type {None, Name, Disconnect,RivalConnected, Win,Lose, Selected, Bitis,Start,UserNumber,Coordination}
     
     public Message_Type type;
     public Object content;
