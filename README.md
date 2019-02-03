@@ -8,4 +8,3 @@ Computer Networks Lecture Project
 
 
 Ahmet Fırat Şüphesiz
-ahmetfiratsuphesiz@gmail.com
